@@ -1,4 +1,4 @@
-from lightning_model import NuWave2
+from nuwave2.lightning_model import NuWave2
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf as OC
@@ -10,7 +10,7 @@ import torch
 from tqdm import tqdm
 from scipy.io.wavfile import write as swrite
 
-from utils.stft import STFTMag
+from nuwave2.utils.stft import STFTMag
 
 
 def test(args):

@@ -1,4 +1,4 @@
-from lightning_model import NuWave2
+from nuwave2.lightning_model import NuWave2
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf as OC

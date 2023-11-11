@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import pytorch_lightning as pl
 
-import dataloader
-from diffusion import Diffusion
+import nuwave2.dataloader
+from nuwave2.diffusion import Diffusion
 
 
 class NuWave2(pl.LightningModule):

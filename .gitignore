@@ -2,3 +2,6 @@
 *.DS*
 *__pycache__*
 *.pyc
+/test_sample/result
+/.vs
+/inference.spec
