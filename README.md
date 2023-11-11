@@ -1,9 +1,9 @@
 # NU-Wave2 &mdash; Official PyTorch Implementation
 
 **NU-Wave 2: A General Neural Audio Upsampling Model for Various Sampling Rates**<br>
-Seungu Han, Junhyeok Lee @ [MINDsLab Inc.](https://github.com/mindslab-ai), SNU
+Seungu Han, Junhyeok Lee @ [MINDsLab Inc.](https://github.com/maum-ai), SNU
 
-[![arXiv](https://img.shields.io/badge/arXiv-2206.08545-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2206.08545) [![GitHub Repo stars](https://img.shields.io/github/stars/mindslab-ai/nuwave2?color=yellow&label=NU-Wave2&logo=github&style=flat-square)](https://github.com/mindslab-ai/nuwave2) [![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://mindslab-ai.github.io/nuwave2/)
+[![arXiv](https://img.shields.io/badge/arXiv-2206.08545-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2206.08545) [![GitHub Repo stars](https://img.shields.io/github/stars/maum-ai/nuwave2?color=yellow&label=NU-Wave2&logo=github&style=flat-square)](https://github.com/maum-ai/nuwave2) [![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://maum-ai.github.io/nuwave2/)
 
 Official Pytorch+[Lightning](https://github.com/PyTorchLightning/pytorch-lightning) Implementation for NU-Wave 2.
 
@@ -11,7 +11,7 @@ Official Pytorch+[Lightning](https://github.com/PyTorchLightning/pytorch-lightni
 
 **Official Checkpoint can be downloaded from [here](https://drive.google.com/file/d/11t0cQYx6ZadKQjmfGnqxUUH2UEk5Yzk7/view?usp=sharing).**  
 
-**We add some additional samples for non-English voice (Korean) and ablation study without BSFT on the [demo page](https://mindslab-ai.github.io/nuwave2/). Please check it!**
+**We add some additional samples for non-English voice (Korean) and ablation study without BSFT on the [demo page](https://maum-ai.github.io/nuwave2/). Please check it!**
 
 **We also trained a model targeting 16 kHz (3.2 kHz ~ 16 kHz source). The Checkpoint can be downloaded from [here](https://drive.google.com/file/d/1IZihqb0LKHLtqRjyhHBGxXHJhUwskVRo/view?usp=sharing).**  
 
@@ -23,7 +23,7 @@ Official Pytorch+[Lightning](https://github.com/PyTorchLightning/pytorch-lightni
 
 ## Clone our Repository
 ```bash
-git clone --recursive https://github.com/mindslab-ai/nuwave2.git
+git clone --recursive https://github.com/maum-ai/nuwave2.git
 cd nuwave2
 ```
 
@@ -109,7 +109,7 @@ Please check parser.
   
 **__Note:__** If your input is downsampled (12kHz, 16kHz, etc.) audio sample with a full valid frequency component based on the corresponding sampling rate, give the parser as '--sr {Sampling rate of input audio}' without '--gt' parser.  
 On the other hand, if you have a 48kHz audio sample with a full valid frequency component and just want to check whether the model works well, give the parser as '--sr {Sampling rate of input which you want to check}' and add '--gt' parser.  
-Please check [this issue](https://github.com/mindslab-ai/nuwave2/issues/5) for more information. 
+Please check [this issue](https://github.com/maum-ai/nuwave2/issues/5) for more information. 
 ```python
     parser = argparse.ArgumentParser()
     parser.add_argument('-c',
@@ -141,7 +141,7 @@ Please check [this issue](https://github.com/mindslab-ai/nuwave2/issues/5) for m
 
 ## References
 This implementation uses code from following repositories:
-- [official NU-Wave pytorch implementation](https://github.com/mindslab-ai/nuwave)
+- [official NU-Wave pytorch implementation](https://github.com/maum-ai/nuwave)
 - [revsic's Jax/Flax implementation of Variational-DiffWave](https://github.com/revsic/jax-variational-diffwave)
 - [ivanvovk's WaveGrad pytorch implementation](https://github.com/ivanvovk/WaveGrad)
 - [lmnt-com's DiffWave pytorch implementation](https://github.com/lmnt-com/diffwave)
@@ -151,10 +151,10 @@ This implementation uses code from following repositories:
 This README and the webpage for the audio samples are inspired by:
 - [Tips for Publishing Research Code](https://github.com/paperswithcode/releasing-research-code)
 - [Audio samples webpage of DCA](https://google.github.io/tacotron/publications/location_relative_attention/)
-- [Cotatron](https://github.com/mindslab-ai/cotatron/)
+- [Cotatron](https://github.com/maum-ai/cotatron/)
 - [Audio samples wabpage of WaveGrad](https://wavegrad.github.io)
 
-The audio samples on our [webpage](https://mindslab-ai.github.io/nuwave2/) are partially derived from:
+The audio samples on our [webpage](https://maum-ai.github.io/nuwave2/) are partially derived from:
 - [VCTK dataset(0.92)](https://datashare.ed.ac.uk/handle/10283/3443): 46 hours of English speech from 108 speakers.
 - [LJSpeech](https://keithito.com/LJ-Speech-Dataset/): a single-speaker English dataset consists of 13100 short audio clips of a female speaker reading passages from 7 non-fiction books, approximately 24 hours in total.
 
