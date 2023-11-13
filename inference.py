@@ -1,25 +1,19 @@
-from nuwave2.lightning_model import NuWave2
+from .lightning_model import NuWave2
 from omegaconf import OmegaConf as OC
 import os
 import argparse
-import datetime
-from glob import glob
 import torch
 import librosa as rosa
 from scipy.io.wavfile import write as swrite
 import numpy as np
 from scipy.signal import sosfiltfilt
-from scipy.signal import butter, cheby1, cheby2, ellip, bessel
+from scipy.signal import cheby1
 from scipy.signal import resample_poly
-import random
-import logging
 
+nuwave2_dir = os.path.dirname(os.path.realpath(__file__))
 
-def main(checkpoint, wavarg, sr, steps=None, gt=False, device='cuda', result_dir=None, logfile="inference.log"):
-    old_cwd = os.getcwd()
-    os.chdir(os.path.join(old_cwd, 'nuwave2'))
-    #torch.backends.cudnn.benchmark = False
-    hparams = OC.load('hparameter.yaml')
+def main(checkpoint, wavarg, sr, steps=None, gt=False, device='cuda', result_dir=None):
+    hparams = OC.load(os.path.join(nuwave2_dir, 'hparameter.yaml'))
     if result_dir == None:
         result_dir = hparams.log.test_result_dir
     os.makedirs(result_dir, exist_ok=True)
@@ -75,30 +69,11 @@ def main(checkpoint, wavarg, sr, steps=None, gt=False, device='cuda', result_dir
     wav_recon, wav_list = model.inference(wav_l, band, steps, noise_schedule)
 
     wav = torch.clamp(wav, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    #save_stft_mag(wav, os.path.join(result_dir, f'wav.png'))
     wavname = os.path.basename(wavarg)
-    # if gt:
-        # swrite(os.path.join(hparams.log.test_result_dir, wavname + '.wav'),
-               # hparams.audio.sampling_rate, wav[0].detach().cpu().numpy())
-    # else:
-        # swrite(os.path.join(hparams.log.test_result_dir, wavname + '.wav'),
-               # sr, wav[0].detach().cpu().numpy())
-
-    # wav_l = torch.clamp(wav_l, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    # #save_stft_mag(wav_l, os.path.join(result_dir, f'wav_l.png'))
-    # swrite(os.path.join(hparams.log.test_result_dir, wavname) + '.wav',
-           # hparams.audio.sampling_rate, wav_l[0].detach().cpu().numpy())
 
     wav_recon = torch.clamp(wav_recon, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    #save_stft_mag(wav_recon, os.path.join(result_dir, f'result.png'))
     swrite(os.path.join(result_dir, wavname),
            hparams.audio.sampling_rate, wav_recon[0].detach().cpu().numpy())
-    os.chdir(old_cwd)
-    # for i in range(len(wav_list)):
-    #     wav_recon_i = torch.clamp(wav_list[i], min=-1, max=1-torch.finfo(torch.float16).eps)
-    #     save_stft_mag(wav_recon_i, os.path.join(hparams.log.test_result_dir, f'result_{i}.png'))
-    #     swrite(os.path.join(hparams.log.test_result_dir, f'result_{i}.wav'),
-    #            hparams.audio.sampling_rate, wav_recon_i[0].detach().cpu().numpy())
         
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ import torch.nn.functional as F
 from os import path, makedirs
 from omegaconf import OmegaConf as OC
 from datetime import datetime, timedelta
-from nuwave2.utils.stft import STFTMag
+from .stft import STFTMag
 import librosa as rosa
 
 

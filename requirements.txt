@@ -1,5 +1,8 @@
-ffmpeg
+ffmpeg-python
 prefetch_generator
 librosa
 omegaconf
+torch
+torchvision
+torchaudio
 lightning

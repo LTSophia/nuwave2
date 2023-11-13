@@ -1,17 +1,17 @@
-from nuwave2.lightning_model import NuWave2
+from .lightning_model import NuWave2
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf as OC
 import os
 import argparse
-import datetime
 from glob import glob
 import torch
 from tqdm import tqdm
 from scipy.io.wavfile import write as swrite
 
-from nuwave2.utils.stft import STFTMag
+from .utils.stft import STFTMag
 
+nuwave2_dir = os.path.dirname(os.path.realpath(__file__))
 
 def test(args):
     def cal_snr(pred, target):
@@ -25,7 +25,7 @@ def test(args):
         return (sp - st).square().mean(dim=1).sqrt().mean(), (sp[:,hf:,:] - st[:,hf:,:]).square().mean(dim=1).sqrt().mean(), \
                (sp[:,:hf,:] - st[:,:hf,:]).square().mean(dim=1).sqrt().mean()
 
-    hparams = OC.load('hparameter.yaml')
+    hparams = OC.load(os.path.join(nuwave2_dir, 'hparameter.yaml'))
     hparams.save = args.save or False
     model = NuWave2(hparams, False).cuda()
     if args.ema:

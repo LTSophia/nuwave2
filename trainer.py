@@ -1,4 +1,4 @@
-from nuwave2.lightning_model import NuWave2
+from .lightning_model import NuWave2
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf as OC
@@ -6,11 +6,11 @@ import os
 import argparse
 import datetime
 from glob import glob
-from pytorch_lightning.callbacks.base import Callback
+from pytorch_lightning.callbacks import Callback
 import torch
 from pytorch_lightning.utilities import rank_zero_only
 from copy import deepcopy
-from utils.tblogger import TensorBoardLoggerExpanded
+from .utils.tblogger import TensorBoardLoggerExpanded
 
 # Other DDPM/Score-based model applied EMA
 # In our works, there are no significant difference
