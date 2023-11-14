@@ -7,7 +7,7 @@ import librosa as rosa
 import random
 
 from scipy.signal import sosfiltfilt
-from scipy.signal import butter, cheby1, cheby2, ellip, bessel
+from scipy.signal import cheby1
 from scipy.signal import resample_poly
 
 

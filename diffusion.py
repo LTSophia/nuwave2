@@ -1,9 +1,8 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from math import atan, exp
 
-from nuwave2.model import NuWave2 as model
+from .model import NuWave2 as model
 
 
 class Diffusion(nn.Module):
