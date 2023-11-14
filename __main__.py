@@ -1,3 +1,3 @@
-from .inference import main
+from .inference import __main__
 
-main()
+__main__()
