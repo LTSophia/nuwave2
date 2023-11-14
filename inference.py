@@ -78,6 +78,16 @@ def progress_bar(current, total, file_name='\t', fill='#'):
     if current == total:
         print()
 
+def paths_to_wavs(paths):
+    wavs = []
+    for path in paths:
+        full_path = os.path.realpath(path)
+        if os.path.isdir(full_path):
+            wavs.extend(list(map(lambda x : os.path.join(full_path, x), os.listdir(full_path))))
+        elif os.path.isfile(full_path):
+            wavs.append(full_path)
+    return wavs
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-c',
@@ -86,11 +96,11 @@ if __name__ == '__main__':
                         required=True,
                         help="Path to checkpoint file.")
     parser.add_argument('-i',
-                        '--wavs',
+                        '--input',
                         action="extend",
                         nargs="+",
                         type=str,
-                        help="WAV files to upscale.")
+                        help="Paths of files or folders to upscale.")
     parser.add_argument('--device',
                         type=str,
                         default='cuda',
@@ -101,6 +111,6 @@ if __name__ == '__main__':
                         type=str,
                         required=False,
                         help="Folder to output upscaled WAVs.")
-
     args = parser.parse_args()
-    main(args.checkpoint, args.wavs, device=args.device, result_dir=args.out)
+    wav_files = paths_to_wavs(args.input)
+    main(args.checkpoint, wav_files, device=args.device, result_dir=args.out)
