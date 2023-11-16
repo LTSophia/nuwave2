@@ -12,8 +12,9 @@ from shutil import copy as shcopy
 
 nuwave2_dir = os.path.dirname(os.path.realpath(__file__))
 
-def main(checkpoint, wav_files, device='cuda', result_dir=None):
+def main(checkpoint_path, wav_files, device='cuda', result_dir=None):
     hparams = OC.load(os.path.join(nuwave2_dir, 'hparameter.yaml'))
+    checkpoint = os.path.realpath(checkpoint_path)
     if result_dir is None:
         result_dir = hparams.log.test_result_dir
     output_fol = os.path.realpath(result_dir)
@@ -64,7 +65,7 @@ def main(checkpoint, wav_files, device='cuda', result_dir=None):
             hparams.audio.sampling_rate, wav_recon[0].detach().cpu().numpy())
 
 def progress_bar(current, total, file_name='\t', fill='#'):
-    length = 50
+    length = 40
     total_digits = max(len(str(total)), 2)
     ws = ' ' * (8 - total_digits * 2)
     print_current = str(current).zfill(total_digits)
@@ -73,7 +74,7 @@ def progress_bar(current, total, file_name='\t', fill='#'):
     filledLength = int(length * (current / total))
     bar = fill * filledLength + '-' * (length - filledLength)
     end_pad = ' ' * (37 - len(file_name))
-    print(f'\r   <{bar}>   [ {progress} ] Completed{ws}  ({file_name}){end_pad}', end='\r')
+    print(f'\r  <{bar}> {ws}[ {progress} ] Completed   ({file_name}){end_pad}', end='\r')
     # Print New Line on Complete
     if current == total:
         print()
